@@ -1,5 +1,15 @@
 import java.sql.*;
 
+/*
+TODO: 
+
+addStep()
+deleteStep()
+mapRecipeIngredient()
+mapRecipeStep()
+
+*/
+
 public class SQLiteDBHelper {
 	
     public static void main(String[] args){
