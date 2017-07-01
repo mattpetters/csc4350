@@ -1,14 +1,21 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 import model.*;
 
 /*
+ * created by Adam Pugliese
+ * This SQLite DB helper will be used to add and remove items (recipes, steps, ingredients) to the DB.
+ * It will also provide methods to select data from the DB.
+ */
+
+/*
 TODO: 
-addStep()
-deleteStep()
 mapRecipeIngredient()
-mapRecipeStep()
+selectAllIngredients()
+selectRecipeSteps()
+selectRecipeIngredients()
 */
 
 public class SQLiteDBHelper {
@@ -37,6 +44,7 @@ public class SQLiteDBHelper {
     /*
      * createTables() was initially intended to...create tables! but I think we should just package a prepared DB with the software.
      */
+    
     public void createTables(){ // I don't think I'll need this
     	String sql = "CREATE TABLE [ingredient_lst] ([Id] INTEGER NOT NULL, [ingredient_name] TEXT NOT NULL, [ingredient_type_id] INTEGER NOT NULL, [is_meat] INTEGER NOT NULL, [favorite] INTEGER NULL, [hide] INTEGER NULL, [created_dt] TEXT NOT NULL, [created_by] TEXT NOT NULL, CONSTRAINT [PK_ingredient_lst] PRIMARY KEY ([Id]), FOREIGN KEY(ingredient_type_id) REFERENCES ingredient_type_lst(Id));";
     	
@@ -48,13 +56,50 @@ public class SQLiteDBHelper {
                System.out.println(e.getMessage());
            }
     }
+    
+    /*
+     * selectAllRecipes() will return an ArrayList of Recipe objects (all active/unhidden recipes). 
+     */
+    public ArrayList<Recipe> selectAllRecipes(){ 
+    	ArrayList<Recipe> recipeLst = new ArrayList<Recipe>();
+    	String sql = "SELECT * from recipe_lst WHERE hide != 1;";
+    	
+    	try (Connection conn = this.connect();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)){
+    		
+               System.out.println("Table Create Success");
+               
+               while (rs.next()) {
+
+                   Recipe recipe = new Recipe();
+                   recipe.setId(rs.getInt("id"));
+                   recipe.setName(rs.getString("recipe_name"));
+                   recipe.setActiveTime(rs.getInt("active_time"));
+                   recipe.setIdleTime(rs.getInt("idle_time"));
+                   recipe.setServes(rs.getInt("serves"));
+                   recipe.setIsUserDefined(rs.getBoolean("user_defined"));
+                   recipe.setIsFavorite(rs.getBoolean("favorite"));
+                   recipe.setIsHidden(rs.getBoolean("hide"));
+                   recipe.setCreatedAt(rs.getDate("create_dt"));
+                   recipe.setCreatedBy(rs.getString("created_by"));
+                   
+                   recipeLst.add(recipe);
+               }
+               //return recipeLst;
+               
+    	} catch (SQLException e) {
+               System.out.println(e.getMessage());
+    	}
+    	return recipeLst;
+    }
 
     
     /*
-     * addIngredient() will accept an object (that is hopefully an ingredient). 
+     * addIngredient() will accept an Ingredient object 
      * It will insert this ingredient into DB table ingredient_lst 
      */
-    public void addIngredient(Ingredient ingredient){
+    public boolean addIngredient(Ingredient ingredient){
     	String ingredient_name = ingredient.getName();	
     	IngredientType ingredient_type_id = ingredient.getType();	
     	Boolean is_meat = ingredient.getIsMeat();	
@@ -69,9 +114,11 @@ public class SQLiteDBHelper {
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){      
-            System.out.println("Success");
+            //System.out.println("Success");
+        	return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
     
@@ -82,6 +129,8 @@ public class SQLiteDBHelper {
      */
     public void deleteIngredient(Ingredient ingredient){ //won't really delete it. will update hide = 1 in ingredient_lst
     	int ingredient_id = ingredient.getId();
+  
+    	/*
     	String ingredient_name = ingredient.getName();	
     	IngredientType ingredient_type_id = ingredient.getType();	
     	Boolean is_meat = ingredient.getIsMeat();	
@@ -89,13 +138,14 @@ public class SQLiteDBHelper {
     	int hide = 0; ingredient.getIsHidden();	
     	Date created_dt = ingredient.getCreatedAt();	
     	String created_by = ingredient.getCreatedBy();
+		*/
 
     	String sql = "UPDATE ingredient_lst SET hide = 1 where id = " + ingredient_id + ";";
         
         try (Connection conn = this.connect();
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){      
-            System.out.println("Success");
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){      
+            System.out.println("Hide Ingredient Success 1");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -105,14 +155,14 @@ public class SQLiteDBHelper {
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){      
-            System.out.println("Success");
+            System.out.println("Hide Ingredient Success 2");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     
     /*
-     * addRecipe() will accept an object (that is hopefully an recipe).
+     * addRecipe() will accept a Recipe object
      * It will insert this recipe into DB table recipe_lst 
      */
     public void addRecipe(Recipe recipe){
@@ -124,8 +174,8 @@ public class SQLiteDBHelper {
     	Boolean user_defined = recipe.getIsUserDefined();
     	Boolean favorite = recipe.getIsFavorite();
     	Boolean hide = recipe.getIsHidden();	
-    	String created_dt = "today";
-    	String created_by = "user";
+    	String created_dt = "Date()"; // Date() is a SQLite function that will be passed in
+    	String created_by = "user"; 
 
     	String sql = "INSERT INTO recipe_lst(recipe_name,active_time,idle_time,total_time,serves,user_defined,favorite,hide,create_dt,create_by)"
     			+ "VALUES('" + recipe_name + "'," + active_time + "," + idle_time + "," + total_time + "," + serves + "," + user_defined + "," + favorite + "," + hide + ",'" + created_dt + "','" + created_by + "')";
@@ -133,7 +183,7 @@ public class SQLiteDBHelper {
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){      
-            System.out.println("Success");
+            System.out.println("Add Recipe Success");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -145,25 +195,28 @@ public class SQLiteDBHelper {
      * But instead of deleting, it will update hide = 1 on recipe_lst table for the ingredient.
      * It will also set hide = 1 on any instance of the recipe in recipe_ingredients
      */
-    public void deleteRecipe(Recipe y){ //won't really delete it. will update hide = 1 in ingredient_lst
-    	int recipe_id = y.getId();
-    	String recipe_name = "Boot Soup"; // recipe.getName();	
-    	int active_time = 1; // recipe.getActTime();	
-    	int idle_time = 1; // recipe.getIdleTime();
-    	int total_time = 1; // recipe.getTotalTime();
-    	int serves = 4; // recipe.getServes();
-    	int user_defined = 1; // recipe.getUDef();
-    	int favorite = 1; // recipe.isFavorite();
-    	int hide = 0; // recipe.hide();	
-    	String created_dt = "today";	
-    	String created_by = "user";
+   
+	public void deleteRecipe(Recipe y){ //won't really delete it. will update hide = 1 in ingredient_lst
+		int recipe_id = y.getId();
+		/*
+    	String recipe_name = y.getName();	
+    	int active_time = y.getActiveTime();	
+    	int idle_time = y.getIdleTime();
+    	int total_time = y.getTotalTime();
+    	int serves = y.getServes();
+    	Boolean user_defined = y.getIsUserDefined();
+    	Boolean favorite = y.getIsFavorite();
+    	Boolean hide = y.getIsHidden();	
+    	Date created_dt = y.getCreatedAt();
+    	String created_by = y.getCreatedBy();
+		*/
 
     	String sql = "UPDATE recipe_lst SET hide = 1 where id = " + recipe_id + ";";
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){      
-            System.out.println("Success");
+            System.out.println("Hide Recipe Success 1");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -173,9 +226,53 @@ public class SQLiteDBHelper {
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){      
-            System.out.println("Success");
+            System.out.println("Hide Recipe Success 2");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+	
+	/*
+	 * addRecipeStep will accept a RecipeStep object and will insert it into the DB table recipe_steps
+	 */
+	public void addRecipeStep(RecipeStep r){
+		// Integer id = r.getId();
+		Integer orderNumber = r.getOrderNumber();
+		String description = r.getDescription();
+		Recipe recipe = r.getRecipe();
+
+    	String sql = "INSERT INTO recipe_steps(order,description,recipe_id)"
+    			+ "VALUES(" + orderNumber + ",'" + description + "'," + recipe.getId() + ")";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){      
+            System.out.println("Add Step Success");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }	
+	
+	/*
+	 * deleteRecipeStep will accept a RecipeStep object, and then delete it from the DB table recipe_steps
+	 */
+	public void deleteRecipeStep(RecipeStep r){
+		Integer id = r.getId();
+		/*
+		Integer orderNumber = r.getOrderNumber();
+		String description = r.getDescription();
+		Recipe recipe = r.getRecipe();
+		*/
+		
+    	String sql = "DELETE FROM recipe_steps WHERE Id = " + id + ";"; 
+    			
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){      
+            System.out.println("Successfully Deleted");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }		
+	
 }
