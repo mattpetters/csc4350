@@ -1,13 +1,14 @@
 import java.sql.*;
+import java.util.Date;
+
+import model.*;
 
 /*
 TODO: 
-
 addStep()
 deleteStep()
 mapRecipeIngredient()
 mapRecipeStep()
-
 */
 
 public class SQLiteDBHelper {
@@ -36,7 +37,6 @@ public class SQLiteDBHelper {
     /*
      * createTables() was initially intended to...create tables! but I think we should just package a prepared DB with the software.
      */
-    
     public void createTables(){ // I don't think I'll need this
     	String sql = "CREATE TABLE [ingredient_lst] ([Id] INTEGER NOT NULL, [ingredient_name] TEXT NOT NULL, [ingredient_type_id] INTEGER NOT NULL, [is_meat] INTEGER NOT NULL, [favorite] INTEGER NULL, [hide] INTEGER NULL, [created_dt] TEXT NOT NULL, [created_by] TEXT NOT NULL, CONSTRAINT [PK_ingredient_lst] PRIMARY KEY ([Id]), FOREIGN KEY(ingredient_type_id) REFERENCES ingredient_type_lst(Id));";
     	
@@ -54,12 +54,12 @@ public class SQLiteDBHelper {
      * addIngredient() will accept an object (that is hopefully an ingredient). 
      * It will insert this ingredient into DB table ingredient_lst 
      */
-    public void addIngredient(Object ingredient){
-    	String ingredient_name = "Lion Steak"; // ingredient.getName();	
-    	int ingredient_type_id = 1; // ingredient.getType();	
-    	int is_meat = 1; // ingredient.isMeat();	
-    	int favorite = 1; // ingredient.isFavorite();
-    	int hide = 0; // ingredient.hide();	
+    public void addIngredient(Ingredient ingredient){
+    	String ingredient_name = ingredient.getName();	
+    	IngredientType ingredient_type_id = ingredient.getType();	
+    	Boolean is_meat = ingredient.getIsMeat();	
+    	Boolean favorite = ingredient.getIsFavorite();
+    	int hide = 0; ingredient.getIsHidden();	
     	String created_dt = "today";	
     	String created_by = "user";
 
@@ -80,15 +80,15 @@ public class SQLiteDBHelper {
      * But instead of deleting, it will update hide = 1 on ingredient_lst table for the ingredient.
      * It will also set hide = 1 on any recipes (in recipe_ingredients) that feature the ingredient.
      */
-    public void deleteIngredient(Object ingredient){ //won't really delete it. will update hide = 1 in ingredient_lst
-    	int ingredient_id = 27;
-    	String ingredient_name = "Lion Steak"; // ingredient.getName();	
-    	int ingredient_type_id = 1; // ingredient.getType();	
-    	int is_meat = 1; // ingredient.isMeat();	
-    	int favorite = 1; // ingredient.isFavorite();
-    	int hide = 0; // ingredient.hide();	
-    	String created_dt = "today";	
-    	String created_by = "user";
+    public void deleteIngredient(Ingredient ingredient){ //won't really delete it. will update hide = 1 in ingredient_lst
+    	int ingredient_id = ingredient.getId();
+    	String ingredient_name = ingredient.getName();	
+    	IngredientType ingredient_type_id = ingredient.getType();	
+    	Boolean is_meat = ingredient.getIsMeat();	
+    	Boolean favorite = ingredient.getIsFavorite();
+    	int hide = 0; ingredient.getIsHidden();	
+    	Date created_dt = ingredient.getCreatedAt();	
+    	String created_by = ingredient.getCreatedBy();
 
     	String sql = "UPDATE ingredient_lst SET hide = 1 where id = " + ingredient_id + ";";
         
@@ -115,16 +115,16 @@ public class SQLiteDBHelper {
      * addRecipe() will accept an object (that is hopefully an recipe).
      * It will insert this recipe into DB table recipe_lst 
      */
-    public void addRecipe(Object recipe){
-    	String recipe_name = "Boot Soup"; // recipe.getName();	
-    	int active_time = 1; // recipe.getActTime();	
-    	int idle_time = 1; // recipe.getIdleTime();
-    	int total_time = 1; // recipe.getTotalTime();
-    	int serves = 4; // recipe.getServes();
-    	int user_defined = 1; // recipe.getUDef();
-    	int favorite = 1; // recipe.isFavorite();
-    	int hide = 0; // recipe.hide();	
-    	String created_dt = "today";	
+    public void addRecipe(Recipe recipe){
+    	String recipe_name = recipe.getName();
+    	int active_time = recipe.getActiveTime();	
+    	int idle_time = recipe.getIdleTime();
+    	int total_time = recipe.getTotalTime();
+    	int serves = recipe.getServes();
+    	Boolean user_defined = recipe.getIsUserDefined();
+    	Boolean favorite = recipe.getIsFavorite();
+    	Boolean hide = recipe.getIsHidden();	
+    	String created_dt = "today";
     	String created_by = "user";
 
     	String sql = "INSERT INTO recipe_lst(recipe_name,active_time,idle_time,total_time,serves,user_defined,favorite,hide,create_dt,create_by)"
@@ -145,8 +145,8 @@ public class SQLiteDBHelper {
      * But instead of deleting, it will update hide = 1 on recipe_lst table for the ingredient.
      * It will also set hide = 1 on any instance of the recipe in recipe_ingredients
      */
-    public void deleteRecipe(Object ingredient){ //won't really delete it. will update hide = 1 in ingredient_lst
-    	int recipe_id = 0; //recipe.getId();
+    public void deleteRecipe(Recipe y){ //won't really delete it. will update hide = 1 in ingredient_lst
+    	int recipe_id = y.getId();
     	String recipe_name = "Boot Soup"; // recipe.getName();	
     	int active_time = 1; // recipe.getActTime();	
     	int idle_time = 1; // recipe.getIdleTime();
@@ -179,4 +179,3 @@ public class SQLiteDBHelper {
         }
     }
 }
-
