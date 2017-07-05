@@ -114,6 +114,7 @@ public class SQLiteDBHelper {
                    recipe.setName(rs.getString("recipe_name"));
                    recipe.setActiveTime(rs.getInt("active_time"));
                    recipe.setIdleTime(rs.getInt("idle_time"));
+                   recipe.setTotalTime(rs.getInt("total_time"));
                    recipe.setServes(rs.getInt("serves"));
                    recipe.setIsUserDefined(rs.getBoolean("user_defined"));
                    recipe.setIsFavorite(rs.getBoolean("favorite"));
