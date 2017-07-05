@@ -1,11 +1,14 @@
 package model;
+import java.sql.Date;
 import java.util.*;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+// import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Created by mattpetters on 6/29/17.
  */
+
+// none of these variables can have DATE type. SQLite doesn't offer that --Adam
 public class Recipe {
 	Integer id; // recipe_id
     String name; //Name of the recipe
@@ -16,7 +19,7 @@ public class Recipe {
     Integer idleTime; //Idle time to cook (number of minutes)
     Integer totalTime; //Total time to cook (number of minutes)
 	Integer serves; //# of servings
-    Date createdAt; //Date the recipe was created
+    String createdAt; //Date the recipe was created
     String createdBy; //String that is the name of the person who created the recipe
 	
     public Integer getId() {
@@ -50,11 +53,11 @@ public class Recipe {
 	public void setIsHidden(Boolean isHidden) {
 		this.isHidden = isHidden;
 	}
-	public Date getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedAt(String date) {
+		this.createdAt = date;
 	}
 	public String getCreatedBy() {
 		return createdBy;
