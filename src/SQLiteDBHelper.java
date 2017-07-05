@@ -12,8 +12,8 @@ import model.*;
 
 /*
 TODO: 
+
 mapRecipeIngredient()
-selectAllIngredients()
 selectRecipeSteps()
 selectRecipeIngredients()
 */
@@ -22,6 +22,43 @@ public class SQLiteDBHelper {
 	
     public static void main(String[] args){
     	SQLiteDBHelper test = new SQLiteDBHelper();
+    	
+    	// TEST FOR SELECT ALL INGREDIENTS
+    	ArrayList<Ingredient> ing = new ArrayList<Ingredient>(test.selectAllIngredients());
+    	System.out.println("ID\tName\tType\tIsMeat\tFavorite\tHidden\tCreatedAt\tCreatedBy"); //column labels
+    	for (int i = 0; i < ing.size(); i++)
+    	{
+    		// System.out.println(ing.get(i).toString());
+    		System.out.println(ing.get(i).getId() + "\t" 
+    							+ ing.get(i).getName() + "\t"
+    							+ ing.get(i).getType() + "\t"
+    							+ ing.get(i).getIsMeat() + "\t"
+    							+ ing.get(i).getIsFavorite() + "\t"
+    							+ ing.get(i).getIsHidden() + "\t"
+    							+ ing.get(i).getCreatedAt() + "\t"
+    							+ ing.get(i).getCreatedBy());
+    	}
+    	
+    	// TEST FOR SELECT ALL RECIPES
+    	ArrayList<Recipe> rec = new ArrayList<Recipe>(test.selectAllRecipes());
+    	System.out.println("ID\tName\tUserDefined\tFavorite\tHidden\tActiveTime\tIdleTIme\tTotalTime\tServes\tCreatedAt\tCreatedBy"); // column labels
+    	for (int i = 0; i < rec.size(); i++)
+    	{
+    		// System.out.println(rec.get(i).getName());
+    		System.out.println(rec.get(i).getId() + "\t" 
+					+ rec.get(i).getName() + "\t"
+					+ rec.get(i).getIsUserDefined() + "\t"
+					+ rec.get(i).getIsFavorite() + "\t"
+					+ rec.get(i).getIsHidden() + "\t"
+					+ rec.get(i).getActiveTime() + "\t"
+					+ rec.get(i).getIdleTime() + "\t"
+					+ rec.get(i).getTotalTime() + "\t"
+					+ rec.get(i).getServes() + "\t"
+					+ rec.get(i).getCreatedAt() + "\t"
+					+ rec.get(i).getCreatedBy());
+    	}
+    	
+    	
     	// test.createTables();
     	// test.addIngredient(null);
     	// test.deleteIngredient(null);
@@ -68,7 +105,7 @@ public class SQLiteDBHelper {
                 Statement stmt  = conn.createStatement();
                 ResultSet rs    = stmt.executeQuery(sql)){
     		
-               System.out.println("Table Create Success");
+               // System.out.println("Query Success");
                
                while (rs.next()) {
 
@@ -81,8 +118,8 @@ public class SQLiteDBHelper {
                    recipe.setIsUserDefined(rs.getBoolean("user_defined"));
                    recipe.setIsFavorite(rs.getBoolean("favorite"));
                    recipe.setIsHidden(rs.getBoolean("hide"));
-                   recipe.setCreatedAt(rs.getDate("create_dt"));
-                   recipe.setCreatedBy(rs.getString("created_by"));
+                   recipe.setCreatedAt(rs.getString("create_dt"));
+                   recipe.setCreatedBy(rs.getString("create_by"));
                    
                    recipeLst.add(recipe);
                }
@@ -92,6 +129,40 @@ public class SQLiteDBHelper {
                System.out.println(e.getMessage());
     	}
     	return recipeLst;
+    }
+
+    /*
+     * selectAllIngredients() will return an ArrayList of Ingredient objects (all active/unhidden ingredients). 
+     */
+    public ArrayList<Ingredient> selectAllIngredients(){ 
+    	ArrayList<Ingredient> ingredientLst = new ArrayList<Ingredient>();
+    	String sql = "SELECT * from ingredient_lst WHERE hide != 1;";
+    	
+    	try (Connection conn = this.connect();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)){
+    		
+               System.out.println("Query Success");
+               
+               while (rs.next()) {
+
+                   Ingredient ingredient = new Ingredient();
+                   ingredient.setId(rs.getInt("id"));
+                   ingredient.setName(rs.getString("ingredient_name"));
+                   ingredient.setIsMeat(rs.getBoolean("is_meat"));
+                   ingredient.setIsFavorite(rs.getBoolean("favorite"));
+                   ingredient.setIsHidden(rs.getBoolean("hide"));
+                   ingredient.setCreatedAt(rs.getString("created_dt"));
+                   ingredient.setCreatedBy(rs.getString("created_by"));
+                   
+                   ingredientLst.add(ingredient);
+               }
+               //return recipeLst;
+               
+    	} catch (SQLException e) {
+               System.out.println(e.getMessage());
+    	}
+    	return ingredientLst;
     }
 
     
