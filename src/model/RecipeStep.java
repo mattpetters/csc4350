@@ -4,6 +4,8 @@ package model;
  * Created by mattpetters on 6/29/17.
  */
 public class RecipeStep {
+	
+	// none of these variables can have DATE type. SQLite doesn't offer that --Adam
 	Integer id; //ID for the recipe step
     Integer orderNumber; //Order number for the recipe step in which it should be completed. Must be >= 1.
     String description; //Description of the step. String that contains instructions for how to complete the step.
