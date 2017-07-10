@@ -3,6 +3,10 @@ package model;
 /**
  * Created by mattpetters on 6/29/17.
  */
+
+/**
+ * Model for Recipe Steps
+ */
 public class RecipeStep {
 	
 	// none of these variables can have DATE type. SQLite doesn't offer that --Adam

@@ -9,6 +9,10 @@ import java.util.*;
  */
 
 // none of these variables can have DATE type. SQLite doesn't offer that --Adam
+
+/**
+ * Model for Recipes
+ */
 public class Recipe {
 	Integer id; // recipe_id
     String name; //Name of the recipe

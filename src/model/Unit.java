@@ -4,6 +4,9 @@ package model;
  * Created by mattpetters on 6/29/17.
  */
 
+/**
+ * Model for Units
+ */
 public class Unit {
     Integer id; //ID for the unit
     String name; //Name of the ingredient unit
