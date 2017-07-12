@@ -1,6 +1,6 @@
 package controllers;
 
-import model.Ingredient;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class FindRecipeViewController {
      * @return Recipe that matches ingredients
      */
 
-    public Recipe findRecipeForIngredients(ArrayList<Ingredient> ingredients){}
+//    public Recipe findRecipeForIngredients(ArrayList<Ingredient> ingredients){}
 
 
     /**

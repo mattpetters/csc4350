@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="CENTER" hgap="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="357.0" prefWidth="601.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainViewController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.409423828125" minWidth="10.0" prefWidth="156.47277069091797" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.29973602294922" minWidth="10.0" prefWidth="131.52722930908203" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.3314208984375" minWidth="10.0" prefWidth="151.45651245117188" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0633544921875" minWidth="52.3858642578125" prefWidth="156.03167724609375" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #687A61;" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.valignment="CENTER">
+<BorderPane fx:id="navigationRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-min-height: 500; -fx-min-width: 800;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainViewController">
+   <left>
+      <VBox alignment="TOP_CENTER" style="-fx-background-color: #B9E3C6; -fx-spacing: 5;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="86.0" fitWidth="150.0" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/potluck.png" />
+                  <Image url="@../img/potluck.png" />
                </image>
-               <VBox.margin>
-                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-               </VBox.margin>
             </ImageView>
-            <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="124.0" style="-fx-background-color: #90C17D;" text="Find" textAlignment="CENTER" wrapText="true">
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="27.0" prefWidth="125.0" style="-fx-background-color: #90C17D;" text="Recipes">
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="25.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" style="-fx-background-color: #90C17D;" text="Ingredients">
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="25.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="121.0" style="-fx-background-color: #90C17D;" text="Import">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="25.0" />
-               </VBox.margin>
-            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#findButtonPressed" prefHeight="27.0" prefWidth="124.0" style="-fx-background-color: #225B34;" text="Find" textFill="WHITE" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ingredientsButtonPressed" prefHeight="27.0" prefWidth="124.0" style="-fx-background-color: #225B34;" text="Ingredients" textFill="WHITE" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#recipesButtonPressed" prefHeight="27.0" prefWidth="126.0" style="-fx-background-color: #225B34;" text="Recipes" textFill="WHITE" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#importButtonPressed" prefHeight="27.0" prefWidth="127.0" style="-fx-background-color: #225B34;" text="Import" textFill="WHITE" />
          </children>
       </VBox>
-   </children>
-   <padding>
-      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-   </padding>
-</GridPane>
+   </left>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" style="-fx-background-color: #58C97C;" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="0.0" prefWidth="22.0" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Made by team Potluck for CSC4350 at" textAlignment="CENTER" />
+            <Region prefHeight="18.0" prefWidth="5.0" />
+            <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/georgiastpanthers.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GSU" />
+         </children>
+         <opaqueInsets>
+            <Insets left="10.0" />
+         </opaqueInsets></HBox>
+   </bottom>
+   <center>
+      <AnchorPane fx:id="viewport" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

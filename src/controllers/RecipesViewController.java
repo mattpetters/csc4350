@@ -26,6 +26,6 @@ public class RecipesViewController {
      * Searches for recipe with a string and returns the recipe found
      */
 
-    public Recipe searchForRecipe(String query) {}
+//    public Recipe searchForRecipe(String query) {}
 
 }
