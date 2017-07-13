@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="controllers.FindRecipeViewController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-spacing: 20;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FindRecipeViewController">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THIS IS MY FIND VIEW" />
+      <Region prefHeight="32.0" prefWidth="600.0" />
+      <HBox alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Find Recipes">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Region prefHeight="0.0" prefWidth="20.0" />
+            <TextField prefHeight="27.0" prefWidth="488.0" promptText="What do you have in your cupboard?" />
+            <Button mnemonicParsing="false" text="Search" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Region prefHeight="100.0" prefWidth="72.0" />
+            <TableView prefHeight="100.0" prefWidth="635.0">
+              <columns>
+                <TableColumn prefWidth="286.0" text="Recipe Name" />
+                  <TableColumn prefWidth="312.0" text="Ingredients" />
+              </columns>
+            </TableView>
+            <Region prefHeight="100.0" prefWidth="78.0" />
+         </children>
+      </HBox>
    </children>
 </VBox>

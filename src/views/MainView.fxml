@@ -48,6 +48,6 @@
          </opaqueInsets></HBox>
    </bottom>
    <center>
-      <AnchorPane fx:id="viewport" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="viewport" prefHeight="200.0" prefWidth="200.0" />
    </center>
 </BorderPane>
