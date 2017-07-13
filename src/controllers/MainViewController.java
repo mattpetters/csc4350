@@ -64,7 +64,7 @@ public class MainViewController {
         System.out.println("Recipes button pressed");
         Parent recipeView = null;
         try {
-            recipeView = FXMLLoader.load(getClass().getResource("../views/RecipeView.fxml"));
+            recipeView = FXMLLoader.load(getClass().getResource("../views/ListRecipesView.fxml"));
             viewport.getChildren().setAll(recipeView);
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class MainViewController {
         System.out.println("Ingredients button pressed");
         Parent ingredientsView = null;
         try {
-            ingredientsView = FXMLLoader.load(getClass().getResource("../views/IngredientsView.fxml"));
+            ingredientsView = FXMLLoader.load(getClass().getResource("../views/ListIngredientsView.fxml"));
             viewport.getChildren().setAll(ingredientsView);
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,15 +95,15 @@ public class MainViewController {
      * @post: View navigates to ingredients view
      * @return none
      */
-    public void importButtonPressed(){
-
-        System.out.println("Import button pressed");
-        Parent importView = null;
-        try {
-            importView = FXMLLoader.load(getClass().getResource("../views/ImportView.fxml"));
-            viewport.getChildren().setAll(importView);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void importButtonPressed(){
+//
+//        System.out.println("Import button pressed");
+//        Parent importView = null;
+//        try {
+//            importView = FXMLLoader.load(getClass().getResource("../views/ImportView.fxml"));
+//            viewport.getChildren().setAll(importView);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

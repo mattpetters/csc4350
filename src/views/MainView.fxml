@@ -26,7 +26,6 @@
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#findButtonPressed" prefHeight="27.0" prefWidth="124.0" style="-fx-background-color: #225B34;" text="Find" textFill="WHITE" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ingredientsButtonPressed" prefHeight="27.0" prefWidth="124.0" style="-fx-background-color: #225B34;" text="Ingredients" textFill="WHITE" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#recipesButtonPressed" prefHeight="27.0" prefWidth="126.0" style="-fx-background-color: #225B34;" text="Recipes" textFill="WHITE" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#importButtonPressed" prefHeight="27.0" prefWidth="127.0" style="-fx-background-color: #225B34;" text="Import" textFill="WHITE" />
          </children>
       </VBox>
    </left>
