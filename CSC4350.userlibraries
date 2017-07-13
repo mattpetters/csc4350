@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="junit:junit:4.12">
+    <archive path="/Users/mattpetters/Dropbox/School/Summer 2017/CSC4350/Projects/CSC4350/lib/junit-4.12.jar" />
+    <archive path="/Users/mattpetters/Dropbox/School/Summer 2017/CSC4350/Projects/CSC4350/lib/hamcrest-core-1.3.jar" />
+  </library>
+  <library name="ormlite-core-5.0">
+    <archive path="/Users/mattpetters/Dropbox/School/Summer 2017/CSC4350/Projects/CSC4350/lib/ormlite-core-5.0.jar" />
+    <archive path="/Users/mattpetters/Dropbox/School/Summer 2017/CSC4350/Projects/CSC4350/lib/ormlite-jdbc-5.0.jar" />
+  </library>
+  <library name="sqlite-jdbc-3.16.1">
+    <archive path="/Users/mattpetters/Dropbox/School/Summer 2017/CSC4350/Projects/CSC4350/lib/sqlite-jdbc-3.16.1.jar" />
+  </library>
+</eclipse-userlibraries>
+
