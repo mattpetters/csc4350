@@ -12,22 +12,22 @@ import java.util.*;
 /**
  * Model for ingredients
  */
-@DatabaseTable (tableName = "Ingredients")
+//@DatabaseTable (tableName = "Ingredients")
 public class Ingredient {
-	@DatabaseField (generatedId = true)
+//	@DatabaseField (generatedId = true)
     Integer id; //ID for the ingredient
     IngredientType type; //Reference to the ingredient type
-	@DatabaseField
+//	@DatabaseField
     String name; //The name of the ingredient
-    @DatabaseField
+//    @DatabaseField
 	Boolean isMeat; //Boolean that indicates if the ingredient contains meat
-    @DatabaseField
+//    @DatabaseField
 	Boolean isFavorite; //Boolean that indicates if the ingredient has been favorited
-    @DatabaseField
+//    @DatabaseField
 	Boolean isHidden; //Boolean that indicates if the ingredient has been hidden
-    @DatabaseField
-	Date createdAt; //Date that the ingredient was created
-    @DatabaseField
+//    @DatabaseField
+	String createdAt; //Date that the ingredient was created
+//    @DatabaseField
 	String createdBy; //Name of the person who created the ingredient
 	
     public Boolean getIsHidden() {
@@ -66,11 +66,11 @@ public class Ingredient {
 	public void setIsFavorite(Boolean isFavorite) {
 		this.isFavorite = isFavorite;
 	}
-//	public String getCreatedAt() {
-//		return createdAt;
-//	}
-	public void setCreatedAt(Date date) {
-		this.createdAt = date;
+	public String getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(String string) {
+		this.createdAt = string;
 	}
 	public String getCreatedBy() {
 		return createdBy;

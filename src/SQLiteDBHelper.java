@@ -35,7 +35,7 @@ public class SQLiteDBHelper {
     							+ ing.get(i).getIsMeat() + "\t"
     							+ ing.get(i).getIsFavorite() + "\t"
     							+ ing.get(i).getIsHidden() + "\t"
-//    							+ ing.get(i).getCreatedAt() + "\t"
+    							+ ing.get(i).getCreatedAt() + "\t"
     							+ ing.get(i).getCreatedBy());
     	}
     	
@@ -155,7 +155,7 @@ public class SQLiteDBHelper {
                    ingredient.setIsMeat(rs.getBoolean("is_meat"));
                    ingredient.setIsFavorite(rs.getBoolean("favorite"));
                    ingredient.setIsHidden(rs.getBoolean("hide"));
-//                   ingredient.setCreatedAt(rs.getString("created_dt"));
+                   ingredient.setCreatedAt(rs.getString("created_dt"));
                    ingredient.setCreatedBy(rs.getString("created_by"));
                    
                    ingredientLst.add(ingredient);
