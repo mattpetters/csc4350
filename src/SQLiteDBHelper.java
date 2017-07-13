@@ -68,7 +68,7 @@ public class SQLiteDBHelper {
     private Connection connect() {
         // SQLite connection string
         //todo: get project root and set there
-        String loc = "jdbc:sqlite:"+System.getProperty("user.dir") + "potlucktest.db";
+        String loc = "jdbc:sqlite:"+System.getProperty("user.dir") + "/potlucktest.db";
 //        String loc = "jdbc:sqlite:C:\\Users\\Adam\\workspace\\potlucktest.db"; // you'll need to change this
         Connection c = null;
         try {

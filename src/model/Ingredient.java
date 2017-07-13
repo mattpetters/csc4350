@@ -26,7 +26,7 @@ public class Ingredient {
     @DatabaseField
 	Boolean isHidden; //Boolean that indicates if the ingredient has been hidden
     @DatabaseField
-	String createdAt; //Date that the ingredient was created
+	Date createdAt; //Date that the ingredient was created
     @DatabaseField
 	String createdBy; //Name of the person who created the ingredient
 	
