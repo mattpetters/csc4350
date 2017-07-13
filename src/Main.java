@@ -4,11 +4,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.repository.SQLiteConnectionSource;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        SQLiteConnectionSource db = new SQLiteConnectionSource();
+        db.initialize();
         try {
         Parent navigation = FXMLLoader.load(getClass().getResource("views/MainView.fxml"));
         Parent find = FXMLLoader.load(getClass().getResource("views/FindView.fxml"));

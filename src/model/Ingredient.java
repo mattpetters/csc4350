@@ -1,4 +1,7 @@
 package model;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.*;
 /**
  * Created by mattpetters on 6/29/17.
@@ -9,15 +12,23 @@ import java.util.*;
 /**
  * Model for ingredients
  */
+@DatabaseTable (tableName = "Ingredients")
 public class Ingredient {
+	@DatabaseField (generatedId = true)
     Integer id; //ID for the ingredient
     IngredientType type; //Reference to the ingredient type
+	@DatabaseField
     String name; //The name of the ingredient
-    Boolean isMeat; //Boolean that indicates if the ingredient contains meat
-    Boolean isFavorite; //Boolean that indicates if the ingredient has been favorited
-    Boolean isHidden; //Boolean that indicates if the ingredient has been hidden
-    String createdAt; //Date that the ingredient was created
-    String createdBy; //Name of the person who created the ingredient
+    @DatabaseField
+	Boolean isMeat; //Boolean that indicates if the ingredient contains meat
+    @DatabaseField
+	Boolean isFavorite; //Boolean that indicates if the ingredient has been favorited
+    @DatabaseField
+	Boolean isHidden; //Boolean that indicates if the ingredient has been hidden
+    @DatabaseField
+	String createdAt; //Date that the ingredient was created
+    @DatabaseField
+	String createdBy; //Name of the person who created the ingredient
 	
     public Boolean getIsHidden() {
 		return isHidden;
