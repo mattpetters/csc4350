@@ -40,7 +40,7 @@ public class IngredientRepositoryTests {
 
         IngredientRepository.getInstance().createIngredientIfNotExists(ing);
 
-        Ingredient fetchedIng = IngredientRepository.getInstance().getIngredientById(1);
+        Ingredient fetchedIng = IngredientRepository.getInstance().getIngredientById(ing.getId());
 
         Assert.assertTrue( ing.getId() == fetchedIng.getId());
 

@@ -66,11 +66,11 @@ public class Ingredient {
 	public void setIsFavorite(Boolean isFavorite) {
 		this.isFavorite = isFavorite;
 	}
-	public String getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(String string) {
-		this.createdAt = string;
+//	public String getCreatedAt() {
+//		return createdAt;
+//	}
+	public void setCreatedAt(Date date) {
+		this.createdAt = date;
 	}
 	public String getCreatedBy() {
 		return createdBy;
