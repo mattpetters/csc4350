@@ -14,8 +14,8 @@ import model.*;
 TODO: 
 
 mapRecipeIngredient()
-selectRecipeSteps()
-selectRecipeIngredients()
+
+
 */
 
 public class SQLiteDBHelper {
@@ -30,13 +30,36 @@ public class SQLiteDBHelper {
 	
 	private void test(){
 		
-	    	SQLiteDBHelper test = new SQLiteDBHelper();
+		
+		/*
+		 // TEST FOR SELECT RECIPE INGREDIENTS FOR A SPECIFIC RECIPE
+		  
+	    	Recipe bogus = new Recipe();
+	    	bogus.setId(1);
+	    	ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>(this.selectRecipeIngredients(bogus));
+	    	System.out.println("ID\tRecipeID\tIngredientId\tIngredientName\tAmount\tUnitID\tUnitName"); // column labels
+	    	for (int i = 0; i < recipeIngredients.size(); i++)
+	    	{
+	    		// System.out.println(rec.get(i).getName());
+	    		System.out.println(recipeIngredients.get(i).getId() + "\t" 
+						+ recipeIngredients.get(i).getId() + "\t"
+						+ recipeIngredients.get(i).getRecipeId() + "\t"
+						+ recipeIngredients.get(i).getIngredientId() + "\t"
+						+ recipeIngredients.get(i).getIngredientName() + "\t"
+						+ recipeIngredients.get(i).getAmount() + "\t"
+						+ recipeIngredients.get(i).getUnitId() + "\t"
+						+ recipeIngredients.get(i).getUnitName());
+	    	}
+	    	*/
+	    	
+	    	/*
+	    	//TEST FOR SEARCH BY USER-PROVIDED INGREDIENTS
+	    	 
 	    	ArrayList<String> ingredientsThatUserHas = new ArrayList<String>();
 	    	
 	    	ingredientsThatUserHas.add("Sliced Ham");
 	    	ingredientsThatUserHas.add("Sliced Cheese");
-			test.searchRecipes(ingredientsThatUserHas);
-			
+			//test.searchRecipes(ingredientsThatUserHas);
 			ArrayList<Recipe> rec = new ArrayList<Recipe>(test.searchRecipes(ingredientsThatUserHas));
 	    	System.out.println("ID\tName\tUserDefined\tFavorite\tHidden\tActiveTime\tIdleTIme\tTotalTime\tServes\tCreatedAt\tCreatedBy"); // column labels
 	    	for (int i = 0; i < rec.size(); i++)
@@ -54,11 +77,12 @@ public class SQLiteDBHelper {
 						+ rec.get(i).getCreatedAt() + "\t"
 						+ rec.get(i).getCreatedBy());
 	    	}
-			
+			*/
 			
 			
 	    	/*
 	    	// TEST FOR SELECT ALL INGREDIENTS
+	    	 
 	    	ArrayList<Ingredient> ing = new ArrayList<Ingredient>(test.selectAllIngredients());
 	    	System.out.println("ID\tName\tType\tIsMeat\tFavorite\tHidden\tCreatedAt\tCreatedBy"); //column labels
 	    	for (int i = 0; i < ing.size(); i++)
@@ -75,6 +99,7 @@ public class SQLiteDBHelper {
 	    	}
 	    	
 	    	// TEST FOR SELECT ALL RECIPES
+	    	 
 	    	ArrayList<Recipe> rec = new ArrayList<Recipe>(test.selectAllRecipes());
 	    	System.out.println("ID\tName\tUserDefined\tFavorite\tHidden\tActiveTime\tIdleTIme\tTotalTime\tServes\tCreatedAt\tCreatedBy"); // column labels
 	    	for (int i = 0; i < rec.size(); i++)
@@ -176,6 +201,77 @@ public class SQLiteDBHelper {
     	return ingredientLst;
     }
 
+    /*
+     * selectRecipeIngredients() will return an ArrayList of Ingredient objects assigned to a specific recipe (all active/unhidden ingredients). 
+     */
+    public ArrayList<RecipeIngredient> selectRecipeIngredients(Recipe chosenRecipe){ 
+    	ArrayList<RecipeIngredient> ingredientLst = new ArrayList<RecipeIngredient>();
+    	String sql = "Select ri.*, ul.unit_name, il.ingredient_name "
+    			+ "from recipe_ingredients ri "
+    			+ "join ingredient_lst il on ri.ingredient_id = il.Id "
+    			+ "join unit_lst ul on ri.unit_id = ul.Id "
+    			+ "where ri.recipe_id = " + chosenRecipe.getId() + ";";
+    	
+    	try (Connection conn = this.connect();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)){
+    		
+               System.out.println("Query Success");
+               
+               while (rs.next()) {
+
+                   RecipeIngredient ingredient = new RecipeIngredient();
+                   ingredient.setId(rs.getInt("id"));
+                   ingredient.setRecipeId(rs.getInt("recipe_id"));
+                   ingredient.setIngredientId(rs.getInt("ingredient_id"));
+                   ingredient.setIngredientName(rs.getString("ingredient_name"));
+                   ingredient.setAmount(rs.getFloat("amount"));
+                   ingredient.setUnitId(rs.getInt("unit_id"));
+                   ingredient.setUnitName(rs.getString("unit_name"));
+                   
+                   ingredientLst.add(ingredient);
+               }
+               //return recipeLst;
+               
+    	} catch (SQLException e) {
+               System.out.println(e.getMessage());
+    	}
+    	return ingredientLst;
+    }
+
+    /*
+     * selectRecipeSteps() will return an ArrayList of steps assigned to a specified recipe 
+     */
+    public ArrayList<RecipeStep> selectRecipeSteps(Recipe chosenRecipe){ // THIS SHIT IS NOT DONE!! 
+    	ArrayList<RecipeStep> stepLst = new ArrayList<RecipeStep>();
+    	String sql = "select "
+    			+ "* "
+    			+ "from recipe_steps "
+    			+ "where recipe_id =" + chosenRecipe.getId() + ";";
+    	
+    	try (Connection conn = this.connect();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)){
+    		
+               System.out.println("Query Success");
+               
+               while (rs.next()) {
+
+                   RecipeStep step = new RecipeStep();
+                   step.setId(rs.getInt("Id"));
+                   step.setRecipeId(rs.getInt("recipe_id"));
+                   step.setOrderNumber(rs.getInt("order"));
+                   step.setDescription(rs.getString("description"));
+                                     
+                   stepLst.add(step);
+               }
+               
+    	} catch (SQLException e) {
+               System.out.println(e.getMessage());
+    	}
+    	return stepLst;
+    }
+    
     
     /*
 	 * selectAllRecipes() will return an ArrayList of Recipe objects (all active/unhidden recipes). 
