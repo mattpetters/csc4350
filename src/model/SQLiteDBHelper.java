@@ -27,7 +27,11 @@ public class SQLiteDBHelper {
 	}
 	
 	public static void main(String[] args){
-		;
+		/*
+		// Class.forName("org.sqlite.JDBC");
+		SQLiteDBHelper test = new SQLiteDBHelper();
+		test.connect();
+		*/
 	}
 	
 	private void test(){
@@ -139,11 +143,13 @@ public class SQLiteDBHelper {
             isUnixOS = true;
         }
         String loc;
+        
         if (isUnixOS){
         loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "/potlucktest.db";
         } else {
             loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\potlucktest.db";
         }
+        
 
         Connection c = null;
         try {
@@ -360,6 +366,42 @@ public class SQLiteDBHelper {
 		return ingredientLst;
 	}
 
+	/*
+	 * this will select an ingredient given an ID
+	 */
+	public Ingredient selectIngredientByID(int id){ 
+		ArrayList<Ingredient> ingredientLst = new ArrayList<Ingredient>();
+		String sql = "SELECT * from ingredient_lst "
+				+ "WHERE hide != 1 and Id = " + id + ";";
+		
+		try (Connection conn = this.connect();
+	            Statement stmt  = conn.createStatement();
+	            ResultSet rs    = stmt.executeQuery(sql)){
+			
+	           System.out.println("Query Success");
+	           
+	           while (rs.next()) {
+	
+	               Ingredient ingredient = new Ingredient();
+	               ingredient.setId(rs.getInt("id"));
+	               ingredient.setName(rs.getString("ingredient_name"));
+	               ingredient.setIsMeat(rs.getBoolean("is_meat"));
+	               ingredient.setIsFavorite(rs.getBoolean("favorite"));
+	               ingredient.setIsHidden(rs.getBoolean("hide"));
+	               ingredient.setCreatedAt(rs.getString("created_dt"));
+	               ingredient.setCreatedBy(rs.getString("created_by"));
+	               
+	               ingredientLst.add(ingredient);
+	           }
+	           //return recipeLst;
+	           
+		} catch (SQLException e) {
+	           System.out.println(e.getMessage());
+		}
+		return ingredientLst.get(0);
+	}
+
+	
 	/*
 	 * selectAllRecipes() will return an ArrayList of Recipe objects (all active/unhidden recipes). 
 	 */

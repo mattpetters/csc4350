@@ -24,7 +24,7 @@ public class RecipeRepository implements BaseRepository{
     }
 
     public ArrayList<Recipe> findByIngredientQuery(ArrayList<String> query){
-        return new SQLiteDBHelper().searchRecipes(query);
+        return helper.searchRecipes(query);
     }
 
     @Override

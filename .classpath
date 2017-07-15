@@ -6,5 +6,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/junit:junit:4.12"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ormlite-core-5.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/sqlite-jdbc-3.16.1"/>
+	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.16.1.jar"/>
 	<classpathentry kind="output" path="out/production/CSC4350"/>
 </classpath>
