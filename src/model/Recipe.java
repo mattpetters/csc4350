@@ -25,6 +25,19 @@ public class Recipe {
 	Integer serves; //# of servings
     String createdAt; //Date the recipe was created
     String createdBy; //String that is the name of the person who created the recipe
+
+	public Recipe(){
+		id = 0;
+		name = "";
+		isUserDefined = false;
+		isHidden = false;
+		isFavorite = false;
+		idleTime = 0;
+		activeTime = 0;
+		totalTime = 0;
+		serves = 0;
+//		createdAt = new Date().toString();
+	}
 	
     public Integer getId() {
 		return id;

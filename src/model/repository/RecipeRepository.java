@@ -10,9 +10,12 @@ import java.util.*;
  * Created by mattpetters on 7/15/17.
  */
 public class RecipeRepository implements BaseRepository{
+    SQLiteDBHelper helper = new SQLiteDBHelper();
+
     @Override
     public ArrayList<Recipe> getAll() {
-        return null;
+        ArrayList<Recipe> recipes = helper.selectAllRecipes();
+        return recipes;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class RecipeRepository implements BaseRepository{
 
     @Override
     public <T> void create(T obj) {
-
+        helper.addRecipe((Recipe) obj);
     }
 
     @Override
