@@ -44,7 +44,7 @@ public class IngredientsViewController {
         newIngredient.setName(nameField.getText());
         repo.create(newIngredient);
         //update table
-        List<Ingredient> fetchedIngredients = repo.getAllIngredients();
+        ArrayList<Ingredient> fetchedIngredients = repo.getAll();
         ingredientTableView.getItems().setAll(fetchedIngredients);
 
  

@@ -42,4 +42,5 @@ public class IngredientRepository implements BaseRepository{
     public <T> void delete(T obj) {
 
     }
+
 }

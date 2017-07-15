@@ -2,12 +2,12 @@ package controllers;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Recipe;
 import model.repository.RecipeRepository;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
 
@@ -30,6 +30,13 @@ public class ListRecipesViewController {
     @FXML
     TableView recipeTableView;
 
+    @FXML
+    TableColumn recipeColumn;
+
+    public ListRecipesViewController(){
+        configureTable();
+    }
+
 
     public Boolean isMeatBoxChecked(){
         Boolean checked = isMeatCheckbox.isSelected();
@@ -44,8 +51,17 @@ public class ListRecipesViewController {
         repo.create(newRecipe);
         //update table
         ArrayList<Recipe> fetchedRecipes = repo.getAll();
-        recipeTableView.getItems().setAll(fetchedRecipes);
 
+        recipeColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.toString()));
+        for (Recipe recipe:
+             fetchedRecipes) {
+            recipeTableView.getItems().add(recipe.getName());
+        }
+
+
+    }
+
+    private void configureTable(){
     }
 
 
