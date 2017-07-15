@@ -27,7 +27,11 @@ public class SQLiteDBHelper {
 	}
 	
 	public static void main(String[] args){
-		;
+		/*
+		// Class.forName("org.sqlite.JDBC");
+		SQLiteDBHelper test = new SQLiteDBHelper();
+		test.connect();
+		*/
 	}
 	
 	private void test(){
@@ -131,6 +135,7 @@ public class SQLiteDBHelper {
     private Connection connect() {
         // SQLite connection string
         //todo: get project root and set there
+
         Boolean isUnixOS;
         if (System.getProperty("os.name").startsWith("Windows")) {
             isUnixOS = false;
@@ -138,11 +143,13 @@ public class SQLiteDBHelper {
             isUnixOS = true;
         }
         String loc;
+        
         if (isUnixOS){
         loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "/potlucktest.db";
         } else {
             loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\potlucktest.db";
         }
+        
 
         Connection c = null;
         try {
@@ -330,7 +337,7 @@ public class SQLiteDBHelper {
 	public ArrayList<Ingredient> selectSpecificIngredient(String searchString){ 
 		ArrayList<Ingredient> ingredientLst = new ArrayList<Ingredient>();
 		String sql = "SELECT * from ingredient_lst "
-				+ "WHERE hide != 1 and ingredient_name like '%" + searchString + "%';";
+				+ "WHERE hide != 1 and lower(ingredient_name) like '%" + searchString.toLowerCase() + "%';";
 		
 		try (Connection conn = this.connect();
 	            Statement stmt  = conn.createStatement();
@@ -360,6 +367,42 @@ public class SQLiteDBHelper {
 	}
 
 	/*
+	 * this will select an ingredient given an ID
+	 */
+	public Ingredient selectIngredientByID(int id){ 
+		ArrayList<Ingredient> ingredientLst = new ArrayList<Ingredient>();
+		String sql = "SELECT * from ingredient_lst "
+				+ "WHERE hide != 1 and Id = " + id + ";";
+		
+		try (Connection conn = this.connect();
+	            Statement stmt  = conn.createStatement();
+	            ResultSet rs    = stmt.executeQuery(sql)){
+			
+	           System.out.println("Query Success");
+	           
+	           while (rs.next()) {
+	
+	               Ingredient ingredient = new Ingredient();
+	               ingredient.setId(rs.getInt("id"));
+	               ingredient.setName(rs.getString("ingredient_name"));
+	               ingredient.setIsMeat(rs.getBoolean("is_meat"));
+	               ingredient.setIsFavorite(rs.getBoolean("favorite"));
+	               ingredient.setIsHidden(rs.getBoolean("hide"));
+	               ingredient.setCreatedAt(rs.getString("created_dt"));
+	               ingredient.setCreatedBy(rs.getString("created_by"));
+	               
+	               ingredientLst.add(ingredient);
+	           }
+	           //return recipeLst;
+	           
+		} catch (SQLException e) {
+	           System.out.println(e.getMessage());
+		}
+		return ingredientLst.get(0);
+	}
+
+	
+	/*
 	 * selectAllRecipes() will return an ArrayList of Recipe objects (all active/unhidden recipes). 
 	 */
 	public ArrayList<Recipe> searchRecipes(ArrayList<String> ingredientsThatUserHas){ 
@@ -380,7 +423,7 @@ public class SQLiteDBHelper {
 		+ "join ingredient_lst il0 on ri0.ingredient_id = il0.Id "
 		+ "where "
 		+ "ri0.recipe_id = ri.recipe_id and "
-		+ "il0.ingredient_name = '" + ingredientsThatUserHas.get(0) +"') ";
+		+ "lower(il0.ingredient_name) = '" + ingredientsThatUserHas.get(0).toLowerCase() +"') ";
 
 		//loop the next few lines for n additional ingredients
 		if (howMany > 1){

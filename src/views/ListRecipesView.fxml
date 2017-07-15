@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListRecipesViewController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListIngredientsViewController">
    <children>
-      <TableView fx:id="recipeTableView" prefHeight="400.0" prefWidth="600.0">
-         <columns>
-            <TableColumn fx:id="recipeColumn" prefWidth="423.0" text="Recipe Name" />
-            <TableColumn fx:id="actionColumn" prefWidth="174.0" text="Actions" />
-         </columns>
+      <TableView prefHeight="400.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="423.0" text="Ingredient Name" />
+          <TableColumn prefWidth="174.0" text="Actions" />
+        </columns>
       </TableView>
-      <HBox style="-fx-spacing: 10;" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Region prefHeight="27.0" prefWidth="27.0" />
-            <TextField fx:id="nameField" promptText="Name" />
-            <CheckBox fx:id="isMeatCheckbox" mnemonicParsing="false" onAction="#isMeatBoxChecked" text="Is meat?" />
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonPressed" text="Add" />
+            <Button mnemonicParsing="false" text="New" />
          </children>
       </HBox>
    </children>
