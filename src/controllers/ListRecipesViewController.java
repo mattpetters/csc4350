@@ -1,11 +1,13 @@
 package controllers;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Recipe;
 import model.repository.RecipeRepository;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -34,7 +36,10 @@ public class ListRecipesViewController {
     TableColumn recipeColumn;
 
     public ListRecipesViewController(){
-        configureTable();
+        if (recipeTableView != null){
+            configureTable();
+        }
+
     }
 
 
@@ -50,18 +55,19 @@ public class ListRecipesViewController {
         newRecipe.setName(nameField.getText());
         repo.create(newRecipe);
         //update table
-        ArrayList<Recipe> fetchedRecipes = repo.getAll();
-
-        recipeColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.toString()));
-        for (Recipe recipe:
-             fetchedRecipes) {
-            recipeTableView.getItems().add(recipe.getName());
-        }
-
+        configureTable();
 
     }
 
     private void configureTable(){
+        recipeColumn.setCellValueFactory(new PropertyValueFactory<Recipe,String>("name"));
+        fetchLatestRecipes();
+    }
+
+    private void fetchLatestRecipes(){
+        ArrayList<Recipe> fetchedRecipes = repo.getAll();
+        ObservableList<Recipe> viewRecipes = FXCollections.observableArrayList(fetchedRecipes);
+        recipeTableView.setItems(viewRecipes);
     }
 
 
