@@ -63,7 +63,7 @@ public class MainViewController {
         System.out.println("Recipes button pressed");
         Parent recipeView = null;
         try {
-            recipeView = FXMLLoader.load(getClass().getResource("../views/ListIngredientssView.fxml"));
+            recipeView = FXMLLoader.load(getClass().getResource("../views/ListRecipesView.fxml"));
             viewport.getChildren().setAll(recipeView);
         } catch (IOException e) {
             e.printStackTrace();
