@@ -131,6 +131,7 @@ public class SQLiteDBHelper {
     private Connection connect() {
         // SQLite connection string
         //todo: get project root and set there
+
         Boolean isUnixOS;
         if (System.getProperty("os.name").startsWith("Windows")) {
             isUnixOS = false;
@@ -330,7 +331,7 @@ public class SQLiteDBHelper {
 	public ArrayList<Ingredient> selectSpecificIngredient(String searchString){ 
 		ArrayList<Ingredient> ingredientLst = new ArrayList<Ingredient>();
 		String sql = "SELECT * from ingredient_lst "
-				+ "WHERE hide != 1 and ingredient_name like '%" + searchString + "%';";
+				+ "WHERE hide != 1 and lower(ingredient_name) like '%" + searchString.toLowerCase() + "%';";
 		
 		try (Connection conn = this.connect();
 	            Statement stmt  = conn.createStatement();
@@ -380,7 +381,7 @@ public class SQLiteDBHelper {
 		+ "join ingredient_lst il0 on ri0.ingredient_id = il0.Id "
 		+ "where "
 		+ "ri0.recipe_id = ri.recipe_id and "
-		+ "il0.ingredient_name = '" + ingredientsThatUserHas.get(0) +"') ";
+		+ "lower(il0.ingredient_name) = '" + ingredientsThatUserHas.get(0).toLowerCase() +"') ";
 
 		//loop the next few lines for n additional ingredients
 		if (howMany > 1){
