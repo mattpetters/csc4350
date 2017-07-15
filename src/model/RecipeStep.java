@@ -14,7 +14,14 @@ public class RecipeStep {
     Integer orderNumber; //Order number for the recipe step in which it should be completed. Must be >= 1.
     String description; //Description of the step. String that contains instructions for how to complete the step.
     Recipe recipe; //Reference to the recipe that owns this recipe step
+    Integer recipeId;
     
+	public Integer getRecipeId() {
+		return recipeId;
+	}
+	public void setRecipeId(Integer recipeId) {
+		this.recipeId = recipeId;
+	}
 	public Integer getId() {
 		return id;
 	}
