@@ -3,6 +3,8 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import model.Ingredient;
+import model.enums.DataSourceType;
+
 import java.util.*;
 
 
@@ -12,10 +14,11 @@ import java.util.ArrayList;
 /**
  * Created by mattpetters on 7/12/17.
  */
-public class IngredientRepository {
+public class IngredientRepository implements BaseRepository {
 
+//    private DataSourceType datasource = DataSourceType.ORMLite;
     private static IngredientRepository instance;
-    Dao<Ingredient, String> ingredientsDao = DaoManager.createDao(SQLiteConnectionSource.connectionSource, Ingredient.class);
+//    Dao<Ingredient, String> ingredientsDao = DaoManager.createDao(SQLiteConnectionSource.connectionSource, Ingredient.class);
 
     protected IngredientRepository() throws SQLException {
 
@@ -32,58 +35,41 @@ public class IngredientRepository {
         return instance;
     }
 
-    public List<Ingredient> getAllIngredients(){
-        List<Ingredient> ingredients = null;
+    public ArrayList<Ingredient> getAll(){
+        ArrayList<Ingredient> ingredients = null;
 
-        try {
-            ingredients = ingredientsDao.queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         return ingredients;
     }
 
-    public void createIngredient(Ingredient ing){
-        try {
-            ingredientsDao.create(ing);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void createIngredientIfNotExists(Ingredient ing){
-        try {
-            ingredientsDao.createIfNotExists(ing);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Ingredient getIngredientById(Integer id){
+    public Ingredient getById(Integer id){
         Ingredient ing = null;
-        try {
-            ing = ingredientsDao.queryForId(id.toString());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ing = ingredientsDao.queryForId(id.toString());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         return ing;
     }
 
-    public void updateIngredient(Ingredient ing){
-        try {
-            ingredientsDao.update(ing);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public <T> void create(T object) {
+
     }
 
-    public void deleteIngredient(Ingredient ing){
-        try {
-            ingredientsDao.delete(ing);
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
+    @Override
+    public <Ingredient> void createIfNotExists(Ingredient object) {
+
+    }
+
+    @Override
+    public <Ingredient> void update(Ingredient object) {
+
+    }
+
+    @Override
+    public <Ingredient> void delete(Ingredient object) {
+
     }
 }
