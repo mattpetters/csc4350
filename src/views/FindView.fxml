@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-spacing: 20;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FindRecipeViewController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-spacing: 20;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FindRecipeViewController">
    <children>
       <Region prefHeight="32.0" prefWidth="600.0" />
       <HBox alignment="CENTER">
@@ -21,14 +25,14 @@
       <HBox>
          <children>
             <Region prefHeight="0.0" prefWidth="20.0" />
-            <TextField prefHeight="27.0" prefWidth="488.0" promptText="What do you have in your cupboard?" />
-            <Button mnemonicParsing="false" text="Search" />
+            <TextField fx:id="searchField" prefHeight="27.0" prefWidth="488.0" promptText="What do you have in your cupboard?" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Region prefHeight="100.0" prefWidth="72.0" />
-            <TableView prefHeight="100.0" prefWidth="635.0">
+            <TableView fx:id="tableView" prefHeight="100.0" prefWidth="635.0">
               <columns>
                 <TableColumn prefWidth="286.0" text="Recipe Name" />
                   <TableColumn prefWidth="312.0" text="Ingredients" />

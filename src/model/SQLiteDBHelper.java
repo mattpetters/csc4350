@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -129,8 +131,19 @@ public class SQLiteDBHelper {
     private Connection connect() {
         // SQLite connection string
         //todo: get project root and set there
-        String loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\potlucktest.db";
-//        String loc = "jdbc:sqlite:C:\\Users\\Adam\\workspace\\potlucktest.db"; // you'll need to change this
+        Boolean isUnixOS;
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            isUnixOS = false;
+        } else {
+            isUnixOS = true;
+        }
+        String loc;
+        if (isUnixOS){
+        loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "/potlucktest.db";
+        } else {
+            loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\potlucktest.db";
+        }
+
         Connection c = null;
         try {
             c = DriverManager.getConnection(loc);
