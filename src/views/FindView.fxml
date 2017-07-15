@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-spacing: 20;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FindRecipeViewController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-spacing: 20;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FindRecipeViewController">
    <children>
       <Region prefHeight="32.0" prefWidth="600.0" />
       <HBox alignment="CENTER">
@@ -29,16 +29,13 @@
             <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="252.0" prefWidth="600.0">
          <children>
-            <Region prefHeight="100.0" prefWidth="72.0" />
-            <TableView fx:id="tableView" prefHeight="100.0" prefWidth="635.0">
+            <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" prefHeight="199.0" prefWidth="600.0">
               <columns>
-                <TableColumn prefWidth="286.0" text="Recipe Name" />
-                  <TableColumn prefWidth="312.0" text="Ingredients" />
+                <TableColumn prefWidth="572.0" text="Recipe Name" />
               </columns>
             </TableView>
-            <Region prefHeight="100.0" prefWidth="78.0" />
          </children>
       </HBox>
    </children>
