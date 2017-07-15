@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -64,7 +63,7 @@ public class MainViewController {
         System.out.println("Recipes button pressed");
         Parent recipeView = null;
         try {
-            recipeView = FXMLLoader.load(getClass().getResource("../views/ListRecipesView.fxml"));
+            recipeView = FXMLLoader.load(getClass().getResource("../views/ListIngredientssView.fxml"));
             viewport.getChildren().setAll(recipeView);
         } catch (IOException e) {
             e.printStackTrace();

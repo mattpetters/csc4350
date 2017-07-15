@@ -5,11 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListIngredientsViewController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListRecipesViewController">
    <children>
       <TableView prefHeight="400.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="423.0" text="Ingredient Name" />
+          <TableColumn prefWidth="423.0" text="Recipe Name" />
           <TableColumn prefWidth="174.0" text="Actions" />
         </columns>
       </TableView>

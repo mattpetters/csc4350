@@ -36,38 +36,31 @@ public class ListRecipesViewController {
     TableColumn recipeColumn;
 
     public ListRecipesViewController(){
-        if (recipeTableView != null){
-            configureTable();
-        }
-
-    }
-
-
-    public Boolean isMeatBoxChecked(){
-        Boolean checked = isMeatCheckbox.isSelected();
-        return checked;
+//        if (recipeTableView != null){
+//            configureTable();
+//        }
 
     }
 
     public void addButtonPressed(){
-        //create new recipe
-        Recipe newRecipe = new Recipe();
-        newRecipe.setName(nameField.getText());
-        repo.create(newRecipe);
-        //update table
-        configureTable();
+//        //create new recipe
+//        Recipe newRecipe = new Recipe();
+//        newRecipe.setName(nameField.getText());
+//        repo.create(newRecipe);
+//        //update table
+//        configureTable();
 
     }
 
     private void configureTable(){
-        recipeColumn.setCellValueFactory(new PropertyValueFactory<Recipe,String>("name"));
-        fetchLatestRecipes();
+//        recipeColumn.setCellValueFactory(new PropertyValueFactory<Recipe,String>("name"));
+//        fetchLatestRecipes();
     }
 
     private void fetchLatestRecipes(){
-        ArrayList<Recipe> fetchedRecipes = repo.getAll();
-        ObservableList<Recipe> viewRecipes = FXCollections.observableArrayList(fetchedRecipes);
-        recipeTableView.setItems(viewRecipes);
+//        ArrayList<Recipe> fetchedRecipes = repo.getAll();
+//        ObservableList<Recipe> viewRecipes = FXCollections.observableArrayList(fetchedRecipes);
+//        recipeTableView.setItems(viewRecipes);
     }
 
 
