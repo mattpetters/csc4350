@@ -487,7 +487,7 @@ public class SQLiteDBHelper {
     	String created_by = System.getProperty("user.name");
 
     	String sql = "INSERT INTO ingredient_lst(ingredient_name,ingredient_type_id,is_meat,favorite,hide,created_dt,created_by)"
-    			+ "VALUES('" + ingredient_name + "'," + ingredient_type_id + "," + is_meat + "," + favorite + "," + hide + ",'" + created_dt + "','" + created_by + "')";
+    			+ "VALUES('" + ingredient_name + "'," + ingredient_type_id + ",'" + is_meat + "','" + favorite + "','" + hide + "','" + created_dt + "','" + created_by + "')";
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();

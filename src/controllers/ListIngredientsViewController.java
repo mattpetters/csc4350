@@ -10,22 +10,30 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Ingredient;
 import model.repository.IngredientRepository;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 /**
  * Created by mattpetters on 7/13/17.
  */
 public class ListIngredientsViewController {
-	
 
-public class IngredientsViewController {
-	
+
+	@FXML
 	TableView ingredientTableView;
+	@FXML
 	TextField nameField;
+	@FXML
     Button addButton;
+	@FXML
     CheckBox isMeatCheckbox;
+    @FXML
+    TableColumn ingredientColumn;
 
    
 	IngredientRepository repo = new IngredientRepository();
@@ -42,17 +50,27 @@ public class IngredientsViewController {
         //create new ingredient
         Ingredient newIngredient = new Ingredient();
         newIngredient.setName(nameField.getText());
+        newIngredient.setIsMeat(isMeatBoxChecked());
         repo.create(newIngredient);
         //update table
-        ArrayList<Ingredient> fetchedIngredients = repo.getAll();
-        ingredientTableView.getItems().setAll(fetchedIngredients);
-
- 
-
+        configureTable();
       
     }
 
-}
+    public void configureTable(){
+        ingredientColumn.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("name"));
+        fetchLatestIngredients();
+
+    }
+
+    public void fetchLatestIngredients(){
+
+        ArrayList<Ingredient> fetched = repo.getAll();
+        ObservableList<Ingredient> viewIngredients = FXCollections.observableArrayList(fetched);
+        ingredientTableView.setItems(viewIngredients);
+    }
+
+
 
 
 }

@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Recipe;
 import model.repository.RecipeRepository;
 
@@ -31,21 +33,15 @@ public class ListRecipesViewController {
     @FXML
     TableView recipeTableView;
 
-
-    public Boolean isMeatBoxChecked(){
-        Boolean checked = isMeatCheckbox.isSelected();
-        return checked;
+    public void addButtonPressed(){
+        //create new recipe
 
     }
 
-    public void addButtonPressed(){
-        //create new recipe
-        Recipe newRecipe = new Recipe();
-        newRecipe.setName(nameField.getText());
-        repo.create(newRecipe);
-        //update table
+    public void fetchLatestIngredients(){
         ArrayList<Recipe> fetchedRecipes = repo.getAll();
-        recipeTableView.getItems().setAll(fetchedRecipes);
+        ObservableList<Recipe> viewRecipes = FXCollections.observableArrayList(fetchedRecipes);
+        recipeTableView.setItems(viewRecipes);
 
     }
 
