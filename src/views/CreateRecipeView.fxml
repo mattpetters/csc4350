@@ -1,12 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ImportRecipeViewController">
-   <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THIS IS MY IMPORT VIEW" />
-   </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ImportRecipeViewController">
+  <children>
+    <HBox prefHeight="13.0" prefWidth="600.0" />
+    <HBox prefHeight="50.0" prefWidth="600.0">
+      <children>
+        <VBox prefHeight="50.0" prefWidth="24.0" />
+        <VBox prefHeight="47.0" prefWidth="552.0">
+          <children>
+            <Label text="Recipe Name">
+              <font>
+                <Font size="12.0" fx:id="x1" />
+              </font>
+            </Label>
+            <TextField prefWidth="539.0" />
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+    <HBox prefHeight="144.0" prefWidth="600.0">
+      <children>
+        <VBox prefHeight="144.0" prefWidth="24.0" />
+        <VBox alignment="CENTER" prefHeight="144.0" prefWidth="552.0">
+          <children>
+            <TableView prefHeight="105.0" prefWidth="552.0">
+              <columns>
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="423.0" text="Ingredient Name" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="129.0" text="Actions" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="22.0" prefWidth="552.0">
+              <children>
+                <TextField prefWidth="200.0" />
+                <Button mnemonicParsing="false" text="Add Ingredient" />
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+    <HBox prefHeight="158.0" prefWidth="586.0">
+      <children>
+        <VBox prefHeight="158.0" prefWidth="24.0" />
+        <VBox prefHeight="158.0" prefWidth="564.0">
+          <children>
+            <Label font="$x1" prefWidth="62.0" text="Steps" textAlignment="LEFT" />
+            <TextArea prefHeight="139.0" prefWidth="564.0" wrapText="true" />
+          </children>
+        </VBox>
+        <VBox prefHeight="158.0" prefWidth="24.0" />
+      </children>
+    </HBox>
+    <HBox prefHeight="13.0" prefWidth="600.0">
+      <children>
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="21.0" prefWidth="599.9998779296875">
+          <children>
+            <Button alignment="BOTTOM_RIGHT" contentDisplay="BOTTOM" mnemonicParsing="false" text="Save" />
+            <VBox prefHeight="21.0" prefWidth="7.0" />
+            <Button alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Cancel" />
+            <VBox prefHeight="21.0" prefWidth="20.0" />
+          </children>
+        </HBox>
+      </children>
+    </HBox>
+  </children>
 </VBox>

@@ -27,6 +27,11 @@ public class IngredientRepository implements BaseRepository{
     public Ingredient getById(Integer id) {
         return helper.selectIngredientByID(id);
     }
+    
+ 
+    public ArrayList<Ingredient> getByName(String text) {
+        return helper.selectSpecificIngredient(text);
+    }
 
     @Override
     public <T> void create(T obj) {
@@ -42,4 +47,6 @@ public class IngredientRepository implements BaseRepository{
     public <T> void delete(T obj) {
 
     }
+
+	
 }
