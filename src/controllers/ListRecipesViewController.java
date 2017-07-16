@@ -42,7 +42,7 @@ public class ListRecipesViewController {
         
         //open createRecipeView
         System.out.println("Add button pressed");
-	    Parent createRecipeView = null;
+	    Parent createRecipeView = null; 
 	    try {
 	    	createRecipeView = FXMLLoader.load(getClass().getResource("../views/CreateRecipeView.fxml"));
 	        viewport.getChildren().setAll(createRecipeView);
