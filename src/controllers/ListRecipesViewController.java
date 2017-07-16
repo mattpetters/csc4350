@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * Created by mattpetters on 7/13/17.
  */
 public class ListRecipesViewController {
+	
 
     RecipeRepository repo = new RecipeRepository();
 

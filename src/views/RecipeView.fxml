@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RecipesViewController">
-   <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THIS IS MY RECIPE VIEW" />
-   </children>
-</VBox>
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <bottom>
+    <HBox prefHeight="100.00009999999747" prefWidth="390.0">
+      <children>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+          <children>
+            <TextField prefWidth="103.0" />
+            <Label text="Label" />
+          </children>
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+          <children>
+            <TextField prefWidth="103.0" />
+            <Label text="Label" />
+          </children>
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+          <children>
+            <TextField prefWidth="94.0" />
+            <Label text="Label" />
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+  </bottom>
+</BorderPane>
