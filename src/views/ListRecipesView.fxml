@@ -7,9 +7,9 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListRecipesViewController" fx:id="listRecipesVBox">
    <children>
-      <TableView prefHeight="400.0" prefWidth="600.0">
+      <TableView prefHeight="400.0" prefWidth="600.0" fx:id="recipeTableView">
         <columns>
-          <TableColumn prefWidth="423.0" text="Recipe Name" />
+          <TableColumn prefWidth="423.0" text="Recipe Name" fx:id="recipeColumn" />
           <TableColumn prefWidth="174.0" text="Actions" />
         </columns>
       </TableView>

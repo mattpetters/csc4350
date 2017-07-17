@@ -10,11 +10,11 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Model for ingredient types
  */
-@DatabaseTable (tableName = "IngredientTypes")
+//@DatabaseTable (tableName = "IngredientTypes")
 public class IngredientType {
-	@DatabaseField (generatedId = true)
+//	@DatabaseField (generatedId = true)
     Integer id;
-	@DatabaseField
+//	@DatabaseField
     String type;
     
 	public Integer getId() {

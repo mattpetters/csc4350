@@ -37,6 +37,11 @@ public class ListIngredientsViewController {
 
    
 	IngredientRepository repo = new IngredientRepository();
+
+	@FXML
+    public void initialize(){
+	    configureTable();
+    }
 	
     
     public Boolean isMeatBoxChecked(){

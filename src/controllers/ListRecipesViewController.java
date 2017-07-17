@@ -1,15 +1,16 @@
 package controllers;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import model.Ingredient;
 import model.Recipe;
 import model.repository.RecipeRepository;
 import sun.applet.Main;
@@ -26,18 +27,20 @@ public class ListRecipesViewController {
     RecipeRepository repo = new RecipeRepository();
 
     @FXML
-    Button addButton;
-
-    @FXML
-    TextField nameField;
-
-
-    @FXML
     TableView recipeTableView;
 
     @FXML
+    TableColumn recipeColumn;
+
+    @FXML
     VBox listRecipesVBox;
-	 
+
+    @FXML
+    public void initialize(){
+        configureTable();
+    }
+
+
     public void newRecipeButtonPressed(){
         System.out.println("Attempting to transition to create recipe");
         Parent createRecipeView = null;
@@ -48,6 +51,19 @@ public class ListRecipesViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void configureTable(){
+        recipeColumn.setCellValueFactory(new PropertyValueFactory<Recipe,String>("name"));
+        fetchLatestIngredients();
+
+    }
+
+    public void fetchLatestIngredients(){
+
+        ArrayList<Recipe> fetched = repo.getAll();
+        ObservableList<Recipe> viewRecipes = FXCollections.observableArrayList(fetched);
+        recipeTableView.setItems(viewRecipes);
     }
 
 
