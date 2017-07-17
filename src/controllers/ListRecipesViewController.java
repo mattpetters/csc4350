@@ -9,8 +9,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import model.Recipe;
 import model.repository.RecipeRepository;
+import sun.applet.Main;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,30 +35,19 @@ public class ListRecipesViewController {
     @FXML
     TableView recipeTableView;
 
-	 private AnchorPane viewport;
+    @FXML
+    VBox listRecipesVBox;
 	 
-    public void addButtonPressed(){
-        //create new recipe
-        Recipe newRecipe = new Recipe();
-        newRecipe.setName(nameField.getText());
-        repo.create(newRecipe);
-        
-        //open createRecipeView
-        System.out.println("Add button pressed");
-	    Parent createRecipeView = null; 
-	    try {
-	    	createRecipeView = FXMLLoader.load(getClass().getResource("../views/CreateRecipeView.fxml"));
-	        viewport.getChildren().setAll(createRecipeView);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	    
-	    //update table
-        ArrayList<Recipe> fetchedRecipes = repo.getAll();
-        recipeTableView.getItems().setAll(fetchedRecipes);
-        
-        
-
+    public void newRecipeButtonPressed(){
+        System.out.println("Attempting to transition to create recipe");
+        Parent createRecipeView = null;
+        try {
+            createRecipeView = FXMLLoader.load(getClass().getResource("../views/CreateRecipeView.fxml"));
+            listRecipesVBox.getChildren().setAll(createRecipeView);
+            System.out.println("Change success");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

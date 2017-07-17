@@ -1,4 +1,5 @@
 //Test Comment - J. H.
+import controllers.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,8 @@ import javafx.stage.Stage;
 import model.repository.SQLiteConnectionSource;
 
 public class Main extends Application {
+
+    static MainViewController mainVC;
 
     @Override
     public void start(Stage primaryStage) throws Exception{

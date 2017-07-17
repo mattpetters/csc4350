@@ -18,7 +18,7 @@ public class MainViewController {
     private BorderPane navigationRoot;
 
     @FXML
-    private AnchorPane viewport;
+    public AnchorPane viewport;
 
     /**
      * Navigates to a view
@@ -28,8 +28,14 @@ public class MainViewController {
      *
      */
 
-    public void navigateToView(){
-
+     public void navigateToView(String name){
+//       switch (name){
+//           case "createRecipeView":
+//
+//               break;
+//           default:
+//               break;
+//       }
 
     }
 
