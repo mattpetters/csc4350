@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,6 +17,8 @@ import model.RecipeStep;
 import model.repository.IngredientRepository;
 import model.repository.RecipeRepository;
 
+import javax.xml.soap.Text;
+
 /**
  * Created by mattpetters on 7/13/17.
  */
@@ -25,6 +28,9 @@ public class CreateRecipeViewController {
 	//search for ingredients
 	//ingredients in recipe
 	//steps
+
+	@FXML
+	TextField recipeNameTextField;
 
 	@FXML
 	TableView recipeIngredientsView;
@@ -38,7 +44,7 @@ public class CreateRecipeViewController {
 	TableColumn recipeIngredientColumn;
 
 	@FXML
-			TableColumn ingredientActionColumn;
+	TableColumn ingredientActionColumn;
 	
 	
 	RecipeRepository recipeRepo = new RecipeRepository();
@@ -75,10 +81,18 @@ public class CreateRecipeViewController {
     }
    
     
-    public void parseSteps() {
-    		ArrayList<String> recipeSteps = new ArrayList<String>();
-//    		recipeSteps.addAll(Arrays.asList(steps.getText().split("\\s*,\\s*")));
-            	
+    public ArrayList<RecipeStep> parseSteps(Integer recipeId) {
+		ArrayList<String> recipeSteps = new ArrayList<String>();
+		ArrayList<RecipeStep> steps = new ArrayList<RecipeStep>();
+   		recipeSteps.addAll(Arrays.asList(stepsTextArea.getText().split("\\s*,\\s*")));
+		for (String str:
+			 recipeSteps) {
+			RecipeStep step = new RecipeStep();
+			step.setDescription(str);
+			step.setRecipeId(recipeId);
+			steps.add(step);
+		}
+		return steps;
 	}
 	
 
@@ -101,15 +115,28 @@ public class CreateRecipeViewController {
 		//if save button pressed, recipe name, ingredients and steps saved to db, and user taken back to ListRecipesView screen
 	 
 		//need to write ingredients and steps to db here
-		
+		Recipe newRecipe = new Recipe();
+		newRecipe.setName(recipeNameTextField.getText());
+		ArrayList<RecipeStep> recipeSteps = parseSteps(newRecipe.getId());
+
+		//save recipe to db
+		recipeRepo.create(newRecipe);
+
+		//save steps to db
+		for (RecipeStep step:
+			 recipeSteps) {
+			recipeRepo.createRecipeSteps(newRecipe,step);
+		}
+
+		//nav to list view
 	 	System.out.println("Save button pressed");
-	    Parent recipeView = null;
-	    try {
-	        recipeView = FXMLLoader.load(getClass().getResource("../views/ListRecipesView.fxml"));
-	        viewport.getChildren().setAll(recipeView);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+//	    Parent recipeView = null;
+//	    try {
+//	        recipeView = FXMLLoader.load(getClass().getResource("../views/ListRecipesView.fxml"));
+//	        viewport.getChildren().setAll(recipeView);
+//	    } catch (IOException e) {
+//	        e.printStackTrace();
+//	    }
 	}
 		 
 	

@@ -1,6 +1,7 @@
 package model.repository;
 
 import model.Recipe;
+import model.RecipeStep;
 import model.SQLiteDBHelper;
 
 import java.util.*;
@@ -40,5 +41,9 @@ public class RecipeRepository implements BaseRepository{
     @Override
     public <T> void delete(T obj) {
 
+    }
+
+    public void createRecipeSteps(Recipe recipe, RecipeStep step){
+        helper.addRecipeStep(step, recipe);
     }
 }
