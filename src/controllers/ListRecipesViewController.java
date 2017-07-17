@@ -55,11 +55,11 @@ public class ListRecipesViewController {
 
     public void configureTable(){
         recipeColumn.setCellValueFactory(new PropertyValueFactory<Recipe,String>("name"));
-        fetchLatestIngredients();
+        fetchLatestRecipes();
 
     }
 
-    public void fetchLatestIngredients(){
+    public void fetchLatestRecipes(){
 
         ArrayList<Recipe> fetched = repo.getAll();
         ObservableList<Recipe> viewRecipes = FXCollections.observableArrayList(fetched);

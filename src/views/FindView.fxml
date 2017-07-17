@@ -33,7 +33,7 @@
          <children>
             <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" prefHeight="199.0" prefWidth="600.0">
               <columns>
-                <TableColumn prefWidth="572.0" text="Recipe Name" />
+                <TableColumn prefWidth="572.0" text="Recipe Name" fx:id="recipeColumn" />
               </columns>
             </TableView>
          </children>

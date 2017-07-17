@@ -7,16 +7,14 @@ import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button; 
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.Ingredient;
 import model.Recipe;
 import model.RecipeStep;
 import model.repository.IngredientRepository;
+import model.repository.RecipeRepository;
 
 /**
  * Created by mattpetters on 7/13/17.
@@ -27,35 +25,48 @@ public class CreateRecipeViewController {
 	//search for ingredients
 	//ingredients in recipe
 	//steps
-	
-	Button addIngredientButton;
-	Button saveRecipeButton;
-	Button cancelRecipeButton;
+
+	@FXML
 	TableView recipeIngredientsView;
-	TextField recipeName;
-	TextField searchField;
-	TextArea steps;
+
+	@FXML
+	TextField ingredientNameField;
+	@FXML
+	TextArea stepsTextArea;
+
+	@FXML
+	TableColumn recipeIngredientColumn;
+
+	@FXML
+			TableColumn ingredientActionColumn;
 	
 	
-	IngredientRepository repo = new IngredientRepository();
+	RecipeRepository recipeRepo = new RecipeRepository();
+	IngredientRepository ingredientRepo = new IngredientRepository();
 	
 	 private AnchorPane viewport;
+
+	@FXML
+	public void initialize(){
+		configureTable();
+	}
+
+	public void configureTable(){
+		recipeIngredientColumn.setCellValueFactory(new PropertyValueFactory<Recipe,String>("name"));
+//		ingredientActionColumn.setCellValueFactory();
+	}
 	 
-	 
-	 
-	 public void addIngredientButtonPressed(){
+	 public void searchIngredientsPressed(){
 	        //find ingredient in db, add to recipe
-		 
-		 if (searchField.getText().length() > 0){
+		 if (ingredientNameField.getText().length() > 0){
 	            ArrayList<String> delimited = new ArrayList<String>();
-	            delimited.addAll(Arrays.asList(searchField.getText().split("\\s*,\\s*")));
-	            ArrayList<Ingredient> foundIngredient = repo.getByName(searchField.getText());
-	            		if(foundIngredient.size() == 0){
+	            delimited.addAll(Arrays.asList(ingredientNameField.getText()));
+	            ArrayList<Ingredient> foundIngredient = ingredientRepo.getByName(ingredientNameField.getText());
+	            if(foundIngredient.size() == 0){
 	                recipeIngredientsView.setPlaceholder(new Label("No recipes found."));
-			} 
-	        else {
+				} else {
 	            updateTableWithIngredient(foundIngredient);
-	        }
+	        	}
 	    }
 	}
 		 
@@ -64,16 +75,14 @@ public class CreateRecipeViewController {
     }
    
     
-    public void steps() {
-    	
+    public void parseSteps() {
     		ArrayList<String> recipeSteps = new ArrayList<String>();
-    		recipeSteps.addAll(Arrays.asList(steps.getText().split("\\s*,\\s*")));
-            
+//    		recipeSteps.addAll(Arrays.asList(steps.getText().split("\\s*,\\s*")));
             	
-		} 
+	}
 	
 
-	public void cancelButtonPressed() {
+	public void cancelPressed() {
 		
 		//if cancel button pressed, user taken back to ListRecipesView screen
 		 
@@ -87,14 +96,11 @@ public class CreateRecipeViewController {
 	     }
 	 }
 	
-	public void saveButtonPressed() {
+	public void savePressed() {
 		
 		//if save button pressed, recipe name, ingredients and steps saved to db, and user taken back to ListRecipesView screen
 	 
 		//need to write ingredients and steps to db here
-		
-		
-     
 		
 	 	System.out.println("Save button pressed");
 	    Parent recipeView = null;

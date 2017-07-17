@@ -2,6 +2,7 @@
 package controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
 import model.repository.RecipeRepository;
 
@@ -24,7 +25,20 @@ public class FindRecipeViewController {
     @FXML
     Button searchButton;
 
+    @FXML
+            TableColumn recipeColumn;
+
     RecipeRepository repo = new RecipeRepository();
+
+
+    @FXML
+    public void initialize(){
+        configureTable();
+    }
+
+    public void configureTable(){
+        recipeColumn.setCellValueFactory(new PropertyValueFactory<Recipe,String>("name"));
+    }
 
     /**
      * Finds a recipe with given ingredients
