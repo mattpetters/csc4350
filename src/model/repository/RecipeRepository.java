@@ -1,7 +1,7 @@
 package model.repository;
 
-import model.Recipe;
-import model.RecipeStep;
+
+import model.*;
 import model.SQLiteDBHelper;
 
 import java.util.*;
@@ -45,5 +45,12 @@ public class RecipeRepository implements BaseRepository{
 
     public void createRecipeSteps(Recipe recipe, RecipeStep step){
         helper.addRecipeStep(step, recipe);
+    }
+
+    public ArrayList<RecipeStep> getStepsForRecipe(Recipe recipe){
+        return helper.selectRecipeSteps(recipe);
+    }
+    public ArrayList<RecipeIngredient> getIngredientsForRecipe(Recipe recipe){
+        return helper.selectRecipeIngredients(recipe);
     }
 }
