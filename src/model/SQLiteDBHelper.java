@@ -136,6 +136,7 @@ public class SQLiteDBHelper {
         // SQLite connection string
         //todo: get project root and set there
 
+	    
         Boolean isUnixOS;
         if (System.getProperty("os.name").startsWith("Windows")) {
             isUnixOS = false;
@@ -144,10 +145,20 @@ public class SQLiteDBHelper {
         }
         String loc;
         
+	//commenting out test connection - Adam 
+	/*
         if (isUnixOS){
         loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "/potlucktest.db";
         } else {
             loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\potlucktest.db";
+        }
+	*/
+	
+	//pointed to production DB - Adam
+	if (isUnixOS){
+        loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "/potluckproduction.db";
+        } else {
+            loc = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\potluckproduction.db";
         }
         
 
